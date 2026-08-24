@@ -1,6 +1,6 @@
 # 00 - Git Master Index & 學習路徑總覽 (Learning Roadmap)
 
-歡迎來到完整的漸進式 Git 實戰指南。本課程共計 **12 大核心級別**，帶您從零基礎個人開發，逐步進階至團隊協作、企業架構、分支防護、CI/CD 自動化與版本發布。
+歡迎來到完整的漸進式 Git 實戰指南。本課程共計 **14 大核心級別**，帶您從零基礎個人開發，逐步進階至團隊協作、企業架構、分支防護、CI/CD 自動化、版本發布、AI 時代人機協同與大型二進位模型管理。
 
 ---
 
@@ -87,6 +87,18 @@
       <td><a href="./12-release-management-semver.md"><code>12-release-management-semver.md</code></a></td>
       <td>語意化版本與 Release 發布<br>(SemVer &amp; Releases)</td>
       <td>SemVer (Major.Minor.Patch), 附註標籤 (<code>git tag -a</code>), <code>gh release create</code> 一鍵發布正式公告與安裝檔資產</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 13</strong></td>
+      <td><a href="./13-ai-agent-git-workflows.md"><code>13-ai-agent-git-workflows.md</code></a></td>
+      <td>AI 時代協同 Git 工作流<br>(AI Agents &amp; Subagents)</td>
+      <td>AI 獨立書桌沙盒比喻, AI Worktree 開發隔離, 提示詞生成規範 Commit, 人眼終審與原子合併 (Squash)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 14</strong></td>
+      <td><a href="./14-git-lfs-large-assets.md"><code>14-git-lfs-large-assets.md</code></a></td>
+      <td>超大二進位檔與 AI 模型管理<br>(Git LFS &amp; Large Assets)</td>
+      <td>雲端置物櫃與 1KB 提貨券指標比喻, <code>git lfs install / track</code>, <code>.gitattributes</code>, ONNX/模型/影音大檔極速拉取</td>
     </tr>
   </tbody>
 </table>
