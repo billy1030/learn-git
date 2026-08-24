@@ -1,6 +1,6 @@
 # Level 01: 基礎核心與個人工作流 (Beginner Foundations)
 
-本章介紹 Git 的核心思維模型（Mental Model）、提交前置準備 (Pre-flight Setup)、Commit ID 數位指紋原理、業界標準語意化規範 (Conventional Commits) 以及個人本機環境操作全景。
+本章介紹 Git 的核心思維模型（Mental Model）、提交前置準備 (Pre-flight Setup)、Commit ID 數位指紋原理、業界標準語意化規範 (Conventional Commits)、個人本機操作全景，以及 `.gitignore` 深度防護規則與快取陷阱解藥。
 
 ---
 
@@ -177,28 +177,107 @@ git config --global commit.template ~/.gitmessage
 
 ---
 
-## 7. 忽略檔案清單 (`.gitignore`)
+## 7. 忽略檔案防護罩 (`.gitignore` 深度指南)
 
-在專案根目錄建立 `.gitignore` 檔案，避免將密鑰、暫存快取或編譯產出誤加入版本庫：
+### A. 核心思維模型：出境海關黑名單
+> - **沒有 `.gitignore`**：Git 就像過度熱心的搬家工人，把你家客廳的垃圾、甚至你皮夾裡的密碼（`.env`）通通裝箱打包推上雲端 💥。
+> - **有 `.gitignore`**：在門口貼上**「海關黑名單清單」**，嚴格命令 Git：「這些目錄與檔案一律當作看不見，絕對不准打包！」
+
+---
+
+### B. 萬用 `.gitignore` 語法規則表
+
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="width: 24%;">語法格式</th>
+      <th style="width: 38%;">範例</th>
+      <th style="width: 38%;">具體忽略效果</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;"><strong>副檔名通配符 (<code>*</code>)</strong></td>
+      <td style="white-space: nowrap;"><code>*.log</code></td>
+      <td>忽略所有以 <code>.log</code> 結尾的檔案</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong>特定資料夾 (<code>/</code>)</strong></td>
+      <td style="white-space: nowrap;"><code>node_modules/</code></td>
+      <td>忽略專案中任何層級名為 <code>node_modules</code> 的目錄</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong>根目錄限定 (<code>/</code> 開頭)</strong></td>
+      <td style="white-space: nowrap;"><code>/config.json</code></td>
+      <td>只忽略根目錄的 <code>config.json</code>，不影響子目錄</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong>任意多層目錄 (<code>**</code>)</strong></td>
+      <td style="white-space: nowrap;"><code>**/temp/*.tmp</code></td>
+      <td>忽略任何層級 <code>temp</code> 資料夾下的 <code>.tmp</code> 檔案</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong>例外反向保留 (<code>!</code>)</strong></td>
+      <td style="white-space: nowrap;"><code>!important.log</code></td>
+      <td>即使上面忽略了 <code>*.log</code>，唯獨此檔案<strong>不忽略</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+### C. 為什麼加了 `.gitignore` 卻無效？（快取陷阱與後悔解藥）
+如果某個檔案在寫入 `.gitignore` 之前就已經被 `git add` 追蹤過，Git 就會**永久記住它**，導致 `.gitignore` 失效。
+
+```powershell
+# 1. 移除所有快取追蹤（不會刪除本機實體檔案！）
+git rm -r --cached .
+
+# 2. 重新讀取最新的 .gitignore 並暫存
+git add .
+
+# 3. 提交生效
+git commit -m "chore: refresh .gitignore cache"
+```
+
+---
+
+### D. 現代全端標準萬用範本 (`.gitignore`)
 
 ```gitignore
-# 依賴套件庫 (Dependencies)
-node_modules/
-venv/
-__pycache__/
-
-# 環境變數與機密金鑰 (Secrets & Credentials)
+# 1. 環境變數與安全金鑰 (絕對禁止上傳！)
 .env
 .env.local
+.env.*.local
 *.pem
 *.key
+*.cert
+credentials.json
 
-# 建置輸出與日誌 (Build outputs & Logs)
+# 2. 相依套件庫 (Dependencies)
+node_modules/
+vendor/
+venv/
+__pycache__/
+*.pyc
+
+# 3. 建置輸出與暫存檔 (Build & Cache)
 dist/
 build/
-*.log
+out/
+.next/
+.cache/
+*.tsbuildinfo
 
-# 作業系統暫存檔 (OS temporary files)
+# 4. 日誌檔案 (Logs)
+*.log
+npm-debug.log*
+
+# 5. 作業系統與 IDE 暫存
 .DS_Store
 Thumbs.db
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
 ```
