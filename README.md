@@ -58,6 +58,12 @@
       <td>企業級架構與大型 Monorepo<br>(Enterprise &amp; DevOps)</td>
       <td><code>git rerere</code> (衝突解決自動重用), <code>sparse-checkout</code> (稀疏檢出/超大型專案秒載), <code>git bundle</code> (離線封裝), Git Hooks (提交前自動檢查), 敏感金鑰抹除, GPG/SSH 簽名認證</td>
     </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 08</strong></td>
+      <td><a href="./08-team-permissions-roles.md"><code>08-team-permissions-roles.md</code></a></td>
+      <td>團隊成員管理與權限控制<br>(Team Permissions &amp; Roles)</td>
+      <td>五大權限層級 (Read, Triage, Write, Maintain, Admin), Web UI 邀請, <code>gh api</code> 命令列批次授權, 權限查詢與撤銷</td>
+    </tr>
   </tbody>
 </table>
 
