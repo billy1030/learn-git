@@ -1,6 +1,6 @@
 # 00 - Git Master Index & 學習路徑總覽 (Learning Roadmap)
 
-歡迎來到完整的漸進式 Git 實戰指南。本課程共計 **15 大核心級別**，帶您從零基礎個人開發，逐步進階至團隊協作、企業架構、分支防護、CI/CD 自動化、版本發布、AI 協同、大型模型版控與 Gist 代碼便利貼。
+歡迎來到完整的漸進式 Git 實戰指南。本課程共計 **16 大核心級別**，帶您從零基礎個人開發，逐步進階至團隊協作、企業架構、分支防護、CI/CD 自動化、版本發布、AI 協同、大型模型版控、Gist 便利貼與 Token 安全權限體系。
 
 ---
 
@@ -20,13 +20,13 @@
       <td style="text-align: center;"><strong>Level 01</strong></td>
       <td><a href="./01-beginner-foundations.md"><code>01-beginner-foundations.md</code></a></td>
       <td>初學者與個人開發者<br>(Beginners &amp; Solo Devs)</td>
-      <td><code>init</code> (初始化), <code>status</code> (狀態查詢), <code>add</code> (暫存/追蹤), <code>commit</code> (提交快照), <code>log</code> (日誌歷史), <code>diff</code> (差異比對), <code>.gitignore</code> (忽略檔案清單)</td>
+      <td><code>init</code>, <code>status</code>, <code>add</code>, <code>commit</code>, <code>log</code>, <code>diff</code>, <code>.gitignore</code> 深度規則, Commit ID 數位指紋, 8 大 Conventional Commits, Git Aliases</td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>Level 02</strong></td>
       <td><a href="./02-remote-github-sync.md"><code>02-remote-github-sync.md</code></a></td>
       <td>雲端同步與個人遠端協作<br>(Cloud Sync &amp; Remotes)</td>
-      <td><code>remote</code> (遠端庫), <code>push</code> (推送), <code>fetch</code> (抓取更新), <code>pull --ff-only</code> (快進拉取), Upstream Tracking (上游追蹤分支), Branch Switching (分支切換)</td>
+      <td><code>remote</code> (遠端庫), <code>push</code> (推送), <code>fetch</code> (抓取更新), <code>pull --ff-only</code> (快進拉取), Upstream Tracking (上游追蹤分支), <code>git</code> vs <code>gh</code> 4 角色地圖</td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>Level 03</strong></td>
@@ -104,7 +104,13 @@
       <td style="text-align: center;"><strong>Level 15</strong></td>
       <td><a href="./15-github-gist-snippets.md"><code>15-github-gist-snippets.md</code></a></td>
       <td>輕量程式碼片段與雲端便利貼<br>(GitHub Gist &amp; Snippets)</td>
-      <td>雲端代碼便利貼比喻, Public vs Secret 隱私模式, <code>gh gist create</code>, 管道傳輸, 嵌入部落格, 零成本即時分享</td>
+      <td>4 大生活比喻, 3 大實戰場景 (日誌短網址、一鍵安裝腳本、部落格嵌入), <code>gh gist create</code>, Public vs Secret</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 16</strong></td>
+      <td><a href="./16-tokens-access-rights.md"><code>16-tokens-access-rights.md</code></a></td>
+      <td>安全存取憑證與細粒度權限<br>(Tokens, PAT &amp; Scopes)</td>
+      <td>飯店感應房卡比喻, 經典版 (Classic) vs 細粒度版 (Fine-grained), 常用 Scopes 字典, <code>gh auth login/status/refresh</code> 安全認證</td>
     </tr>
   </tbody>
 </table>
