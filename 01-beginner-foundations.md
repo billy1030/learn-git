@@ -1,6 +1,6 @@
 # Level 01: 基礎核心與個人工作流 (Beginner Foundations)
 
-本章介紹 Git 的核心思維模型（Mental Model）以及在個人本機環境追蹤檔案變更所需的基礎指令。
+本章介紹 Git 的核心思維模型（Mental Model）、提交前置準備 (Pre-flight Setup)、Commit ID 數位指紋原理、業界標準語意化規範 (Conventional Commits) 以及個人本機環境操作全景。
 
 ---
 
@@ -15,7 +15,104 @@ Git 並非單純拷貝檔案，而是在本機的三個工作區域之間流轉�
 
 ---
 
-## 2. 初次設定個人身分 (Identity Setup)
+## 2. 什麼是 Commit ID (Hash)？怎麼來的？（數位指紋身分證 🪪）
+
+> **寫書比喻**：
+> 當你在某個章節蓋章存檔時，出版社的機器會把：**「你改動的所有文字 + 你的姓名 Email + 蓋章時間戳 + 前一頁的印章編號」** 全部丟進一台不可逆的數學碎紙機（SHA-1 / SHA-256 演算法），瞬間吐出一串 **40 位的唯一十六進位數位指紋**（例如 `a1b2c3d4e5f6...`）。
+
+### 為什麼日常只用「前 7 碼 (Short SHA)」？
+在全世界數十億筆提交中，前 7 碼（例如 `a1b2c3d`）碰撞重複的機率已經低於數億分之一，因此在所有 CLI 指令（如 `git checkout a1b2c3d` 或 `git cherry-pick a1b2c3d`）中，**只需要輸入前 7 碼即可精準識別**！
+
+---
+
+## 3. 標準化語意提交規範 (Conventional Commits 1.0)
+
+團隊中最忌諱的 Commit 訊息是：`update`、`fix bug`、`111`、`aaa`。
+業界統一採用 **Conventional Commits** 結構：
+
+```text
+<type>(<scope>): <subject>
+
+[optional body - 詳細修改原因與背景]
+[optional footer - 關聯的 Issue 或 Breaking Change]
+```
+
+### 推薦的 8 大 Type 動詞字典：
+
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="width: 15%;">前綴 (Type)</th>
+      <th style="width: 18%;">中文分類</th>
+      <th style="width: 45%;">標準範例 (Example)</th>
+      <th style="width: 22%;">適用情境</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>feat</code></strong></td>
+      <td><strong>新功能</strong></td>
+      <td style="white-space: nowrap;"><code>feat(auth): 新增 Google OAuth2 登入按鈕</code></td>
+      <td>使用者可感知的新功能</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>fix</code></strong></td>
+      <td><strong>問題修復</strong></td>
+      <td style="white-space: nowrap;"><code>fix(billing): 修復閏年二月利息計算錯誤</code></td>
+      <td>修復生產或測試中的 Bug</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>docs</code></strong></td>
+      <td><strong>文件更新</strong></td>
+      <td style="white-space: nowrap;"><code>docs(api): 補充會員註冊 API 參數說明</code></td>
+      <td>純 Markdown、註解、文件</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>refactor</code></strong></td>
+      <td><strong>架構重構</strong></td>
+      <td style="white-space: nowrap;"><code>refactor(db): 重構資料庫連線池為單例模式</code></td>
+      <td>不影響外部功能的代碼整理</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>perf</code></strong></td>
+      <td><strong>效能優化</strong></td>
+      <td style="white-space: nowrap;"><code>perf(table): 虛擬滾動降低 DOM 渲染耗時</code></td>
+      <td>提升執行速度或降低記憶體</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>test</code></strong></td>
+      <td><strong>測試補充</strong></td>
+      <td style="white-space: nowrap;"><code>test(order): 新增購物車結帳單元測試</code></td>
+      <td>新增或修改自動化測試</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>chore</code></strong></td>
+      <td><strong>雜項建置</strong></td>
+      <td style="white-space: nowrap;"><code>chore(deps): 升級 TypeScript 至 5.4 版本</code></td>
+      <td>更新依賴套件、修改建置流程</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>ci</code></strong></td>
+      <td><strong>流水線</strong></td>
+      <td style="white-space: nowrap;"><code>ci(actions): 新增自動發布 Docker 映像檔</code></td>
+      <td>修改 GitHub Actions 設定</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## 4. 提交前必備「起飛檢查清單 (Pre-flight Checklist)」
+
+在按下 `git commit` 或 `git push` 前，花 5 秒鐘在腦海中跑一遍：
+- [ ] **1. `git status` 檢查**：確認沒有把 `.env`、敏感金鑰或暫存垃圾檔加入。
+- [ ] **2. `git diff` 檢查**：確認沒有留下測試用的 `console.log`、`print()` 或硬編碼密碼。
+- [ ] **3. 單元測試**：確認本地測試全部跑通。
+- [ ] **4. 語意化命名**：確認以 `feat:`、`fix:` 等動詞開頭，訊息明確。
+
+---
+
+## 5. 初次設定個人身分與提交範本 (Identity Setup)
 
 ```powershell
 # 設定提交者姓名與電子郵件（會記錄在每一筆 commit 中）
@@ -27,29 +124,20 @@ git config --global init.defaultBranch master
 
 # Windows 與 Linux 換行符號自動轉換 (CRLF vs LF)
 git config --global core.autocrlf true
+
+# (選用) 設定全域 Commit 訊息範本
+git config --global commit.template ~/.gitmessage
 ```
 
 ---
 
-## 3. 建立或複製儲存庫 (Repository Setup)
-
-```powershell
-# 初始化 (Initialize)：在當前目錄建立全新的 Git 儲存庫
-git init
-
-# 複製 (Clone)：從遠端 URL 下載既有專案與完整歷史
-git clone https://github.com/billy1030/mds.git
-```
-
----
-
-## 4. 日常循環操作指令速查 (The Daily Edit Loop Reference)
+## 6. 日常循環操作指令速查 (The Daily Edit Loop Reference)
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
     <tr>
       <th style="width: 15%;">操作階段</th>
-      <th style="width: 48%;">標準指令 (Command - 單行完整)</th>
+      <th style="width: 48%;">標準指令 (Command)</th>
       <th style="width: 37%;">中文作用說明與比喻</th>
     </tr>
   </thead>
@@ -66,7 +154,7 @@ git clone https://github.com/billy1030/mds.git
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong>3. 提交快照</strong></td>
-      <td style="white-space: nowrap;"><code>git commit -m "feat: 完成登入表單"</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "feat(auth): 完成登入表單"</code></td>
       <td>將暫存區的內容永久蓋章寫入版本歷史。</td>
     </tr>
     <tr>
@@ -89,7 +177,7 @@ git clone https://github.com/billy1030/mds.git
 
 ---
 
-## 5. 忽略檔案清單 (`.gitignore`)
+## 7. 忽略檔案清單 (`.gitignore`)
 
 在專案根目錄建立 `.gitignore` 檔案，避免將密鑰、暫存快取或編譯產出誤加入版本庫：
 
@@ -114,11 +202,3 @@ build/
 .DS_Store
 Thumbs.db
 ```
-
----
-
-## 6. 個人工作流核心準則 (Best Practices)
-
-1. **頻繁小步提交 (Commit Often)**：按邏輯拆分小提交，避免累積一週才做一次巨大的 Commit。
-2. **語意化清晰備註 (Clear Messages)**：以動詞開頭（如 `feat: 新增搜尋過濾`、`fix: 修復日期計算`）。
-3. **絕不提交機密 (Never Commit Secrets)**：務必在 `git status` 確認 `.env` 等敏感檔案已被忽略。
