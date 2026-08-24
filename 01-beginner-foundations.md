@@ -37,14 +37,14 @@ Git 並非單純拷貝檔案，而是在本機的三個工作區域之間流轉�
 [optional footer - 關聯的 Issue 或 Breaking Change]
 ```
 
-### 推薦的 8 大 Type 動詞字典：
+### 推薦的 8 大 Type 動詞字典與完整 CLI 範例：
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
     <tr>
-      <th style="width: 15%;">前綴 (Type)</th>
-      <th style="width: 18%;">中文分類</th>
-      <th style="width: 45%;">標準範例 (Example)</th>
+      <th style="width: 12%;">前綴</th>
+      <th style="width: 14%;">中文分類</th>
+      <th style="width: 52%;">完整 CLI 執行範例 (Command Example)</th>
       <th style="width: 22%;">適用情境</th>
     </tr>
   </thead>
@@ -52,49 +52,49 @@ Git 並非單純拷貝檔案，而是在本機的三個工作區域之間流轉�
     <tr>
       <td style="white-space: nowrap;"><strong><code>feat</code></strong></td>
       <td><strong>新功能</strong></td>
-      <td style="white-space: nowrap;"><code>feat(auth): 新增 Google OAuth2 登入按鈕</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "feat(auth): 新增 Google OAuth2 登入按鈕"</code></td>
       <td>使用者可感知的新功能</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong><code>fix</code></strong></td>
       <td><strong>問題修復</strong></td>
-      <td style="white-space: nowrap;"><code>fix(billing): 修復閏年二月利息計算錯誤</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "fix(billing): 修復閏年二月利息計算錯誤"</code></td>
       <td>修復生產或測試中的 Bug</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong><code>docs</code></strong></td>
       <td><strong>文件更新</strong></td>
-      <td style="white-space: nowrap;"><code>docs(api): 補充會員註冊 API 參數說明</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "docs(api): 補充會員註冊 API 參數說明"</code></td>
       <td>純 Markdown、註解、文件</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong><code>refactor</code></strong></td>
       <td><strong>架構重構</strong></td>
-      <td style="white-space: nowrap;"><code>refactor(db): 重構資料庫連線池為單例模式</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "refactor(db): 重構資料庫連線池為單例模式"</code></td>
       <td>不影響外部功能的代碼整理</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong><code>perf</code></strong></td>
       <td><strong>效能優化</strong></td>
-      <td style="white-space: nowrap;"><code>perf(table): 虛擬滾動降低 DOM 渲染耗時</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "perf(table): 虛擬滾動降低 DOM 渲染耗時"</code></td>
       <td>提升執行速度或降低記憶體</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong><code>test</code></strong></td>
       <td><strong>測試補充</strong></td>
-      <td style="white-space: nowrap;"><code>test(order): 新增購物車結帳單元測試</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "test(order): 新增購物車結帳單元測試"</code></td>
       <td>新增或修改自動化測試</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong><code>chore</code></strong></td>
       <td><strong>雜項建置</strong></td>
-      <td style="white-space: nowrap;"><code>chore(deps): 升級 TypeScript 至 5.4 版本</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "chore(deps): 升級 TypeScript 至 5.4 版本"</code></td>
       <td>更新依賴套件、修改建置流程</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong><code>ci</code></strong></td>
       <td><strong>流水線</strong></td>
-      <td style="white-space: nowrap;"><code>ci(actions): 新增自動發布 Docker 映像檔</code></td>
+      <td style="white-space: nowrap;"><code>git commit -m "ci(actions): 新增自動發布 Docker 映像檔"</code></td>
       <td>修改 GitHub Actions 設定</td>
     </tr>
   </tbody>
@@ -266,7 +266,7 @@ git config --global alias.unstage "restore --staged"
     <tr>
       <td style="white-space: nowrap;"><strong>任意多層目錄 (<code>**</code>)</strong></td>
       <td style="white-space: nowrap;"><code>**/temp/*.tmp</code></td>
-      <td>忽略任何層級 <code>temp</code> 資料夾下的 <code>.tmp</code> 檔案</td>
+      <td>忽略任何層級 <code>temp</code> 資料夾下的 <code>.tmp</code>檔案</td>
     </tr>
     <tr>
       <td style="white-space: nowrap;"><strong>例外反向保留 (<code>!</code>)</strong></td>
