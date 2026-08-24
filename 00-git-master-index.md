@@ -1,6 +1,6 @@
 # 00 - Git Master Index & 學習路徑總覽 (Learning Roadmap)
 
-歡迎來到完整的漸進式 Git 實戰指南。本課程將帶您從零基礎逐步進階至企業級版本控制、分支保護與 CI/CD 自動化架構。
+歡迎來到完整的漸進式 Git 實戰指南。本課程共計 **12 大核心級別**，帶您從零基礎個人開發，逐步進階至團隊協作、企業架構、分支防護、CI/CD 自動化與版本發布。
 
 ---
 
@@ -75,6 +75,18 @@
       <td><a href="./10-cicd-github-actions.md"><code>10-cicd-github-actions.md</code></a></td>
       <td>CI/CD 自動化與 GitHub Actions<br>(Pipelines &amp; Automation)</td>
       <td>無人自動化品檢工廠比喻, <code>.github/workflows/ci.yml</code> 實戰, 自動測試與打包, <code>gh run list / watch</code> 命令列即時監控</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 11</strong></td>
+      <td><a href="./11-git-submodules-subtrees.md"><code>11-git-submodules-subtrees.md</code></a></td>
+      <td>跨專案模組共用與子儲存庫<br>(Submodules &amp; Subtrees)</td>
+      <td>附錄字典比喻, <code>git submodule add</code>, 遞迴 Clone (<code>--recurse-submodules</code>), 子模組同步更新, Submodule vs Subtree 選型</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 12</strong></td>
+      <td><a href="./12-release-management-semver.md"><code>12-release-management-semver.md</code></a></td>
+      <td>語意化版本與 Release 發布<br>(SemVer &amp; Releases)</td>
+      <td>SemVer (Major.Minor.Patch), 附註標籤 (<code>git tag -a</code>), <code>gh release create</code> 一鍵發布正式公告與安裝檔資產</td>
     </tr>
   </tbody>
 </table>
