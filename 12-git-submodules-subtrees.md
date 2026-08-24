@@ -1,4 +1,4 @@
-# Level 11: 跨專案模組共用與子儲存庫 (Git Submodules & Subtrees)
+# Level 12: 跨專案模組共用與子儲存庫 (Git Submodules & Subtrees)
 
 本章介紹如何在一個 Git 儲存庫中乾淨地引用另一個獨立的 Git 儲存庫（例如前後端共用型別庫、共用 UI 元件庫或第三方核心外掛），並保持獨立更新。
 
@@ -14,7 +14,38 @@
 
 ---
 
-## 2. Submodule 常用核心操作指令表 (Submodule Command Reference)
+## 2. 三大跨專案模組共用實戰範例 (3 Real-World Scenarios)
+
+### 場景 1：前後端共用資料庫結構 (Shared Schemas Repo)
+- **實戰需求**：前端 React 專案與後端 Express 專案都需要共用一套 TypeScript 型別定義庫 `common-schemas.git`：
+```powershell
+# 在前端專案中掛載共用型別庫到 src/types/shared
+git submodule add https://github.com/org/common-schemas.git src/types/shared
+git commit -m "chore: add common-schemas submodule"
+```
+
+---
+
+### 場景 2：新進同事剛 Clone 專案卻發現子目錄是空的 (Submodule Init)
+- **問題**：新同事執行 `git clone` 後，打開 `src/types/shared` 發現裡面空無一物。
+- **一秒解法**：
+```powershell
+# 一鍵遞迴下載所有子模組檔案：
+git submodule update --init --recursive
+```
+
+---
+
+### 場景 3：共用庫升級，主專案同步更新
+- **實戰範例**：共用庫發布了新版本，主專案拉取最新代碼並更新指標：
+```powershell
+git submodule update --remote --merge
+git commit -am "chore: upgrade common-schemas to latest commit"
+```
+
+---
+
+## 3. Submodule 常用核心操作指令表 (Submodule Command Reference)
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
@@ -55,7 +86,7 @@
 
 ---
 
-## 3. Submodule vs Subtree 技術選型對比
+## 4. Submodule vs Subtree 技術選型對比
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>

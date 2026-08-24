@@ -1,4 +1,4 @@
-# Level 08: 團隊成員管理、權限控制與安全稽核 (Team Permissions & Access Control)
+# Level 09: 團隊成員管理、權限控制與安全稽核 (Team Permissions & Access Control)
 
 本章介紹如何在 GitHub 中建立團隊架構、為不同職位（唯讀、PM、工程師、架構師、管理員）配置五大細粒度權限，以及透過 Web UI 與 GitHub CLI (`gh`) 自動化管理團隊成員。
 
@@ -53,7 +53,36 @@
 
 ---
 
-## 2. 方式 A：透過 GitHub 網頁介面管理 (Web UI)
+## 2. 三大團隊成員指派實戰範例 (3 Real-World Permission Scenarios)
+
+### 場景 1：邀請外部審計顧問（唯讀 Read 權限）
+- **需求**：資安稽核團隊需要查驗代碼是否符合 ISO 規範，但絕對不能修改任何檔案。
+- **CLI 實戰**：
+```powershell
+gh api --method PUT /repos/billy1030/learn-git/collaborators/auditor_john -f permission=pull
+```
+
+---
+
+### 場景 2：邀請敏捷專案經理 (PM - Triage 權限)
+- **需求**：PM 需要在 GitHub Issues 上指派工程師、修改 Milestone 里程碑與排定優先級，但不直接寫 code。
+- **CLI 實戰**：
+```powershell
+gh api --method PUT /repos/billy1030/learn-git/collaborators/pm_sarah -f permission=triage
+```
+
+---
+
+### 場景 3：專案結束一秒撤銷外包存取權 (Revoke Access)
+- **需求**：專案驗收完成，合約結束，立刻收回外包工程師的存取權限。
+- **CLI 實戰**：
+```powershell
+gh api --method DELETE /repos/billy1030/learn-git/collaborators/contractor_mike
+```
+
+---
+
+## 3. 方式 A：透過 GitHub 網頁介面管理 (Web UI)
 
 適合直觀的人眼確認與單一成員授權：
 
@@ -68,7 +97,7 @@
 
 ---
 
-## 3. 方式 B：透過 GitHub CLI (`gh`) 命令列自動化管理
+## 4. 方式 B：透過 GitHub CLI (`gh`) 命令列自動化管理
 
 適合 DevOps 工程師、團隊主管或批次腳本快速授權：
 
@@ -111,15 +140,7 @@ gh api /repos/billy1030/learn-git/collaborators/alex123/permission --jq ".permis
 
 ---
 
-### C. 移除離職或專案結束成員 (Revoke Access)
-```powershell
-# 立即撤銷該成員對專案庫的所有存取權限
-gh api --method DELETE /repos/billy1030/learn-git/collaborators/alex123
-```
-
----
-
-## 4. 團隊權限管理常見指令速查表 (Quick Reference)
+## 5. 團隊權限管理常見指令速查表 (Quick Reference)
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>

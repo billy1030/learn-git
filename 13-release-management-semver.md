@@ -1,12 +1,17 @@
-# Level 12: 語意化版本控制與 Release 正式發布 (SemVer & Release Management)
+# Level 13: 語意化版本控制與 Release 正式發布 (SemVer & Release Management)
 
 本章介紹現代軟體工程中的語意化版本命名標準 (Semantic Versioning)、Git 標籤 (Tag) 管理，以及如何使用 GitHub Releases 進行自動化打包與發布公告。
 
 ---
 
-## 1. 核心思維模型：什麼是語意化版本 (SemVer: X.Y.Z)？
+## 1. 核心思維模型：新書正式印刷與封條條碼比喻 (The Book Release Analogy)
 
-> **版本號格式**：`MAJOR.MINOR.PATCH`（例如：`v2.1.4`）
+> **生活化比喻**：
+> - **語意化版本 (SemVer 條碼 🏷️)**：就像圖書館與書店的書籍修訂版號：
+>   - **`PATCH` (第三位數字 `v1.0.1`)**：只修復了第 42 頁的一個錯字，讀者完全不需要重新學習如何閱讀這本書（向下相容修復）。
+>   - **`MINOR` (第二位數字 `v1.1.0`)**：新增了「附錄習題章節」，舊讀者能照樣讀，新功能隨取隨用（向下相容新功能）。
+>   - **`MAJOR` (第一位數字 `v2.0.0`)**：整本書架構大翻新、章節徹底重寫，舊讀者必須依照全新手冊重新學習（破壞性大改版 Breaking Change）。
+> - **GitHub Release（新書發表會與隨書光碟 🎁）**：不僅在 Git 歷史上打上金色標籤，還自動在雲端附帶「編譯好的 `.exe` 安裝檔」與「自動生成的詳細更新日誌 (Changelog)」。
 
 ```text
        v 2 . 1 . 4
@@ -17,9 +22,37 @@
 
 ---
 
-## 2. Git 標籤管理 (Git Tagging Reference)
+## 2. 三大版本發布實戰範例 (3 Real-World Release Scenarios)
 
-標籤 (Tag) 就像給特定歷史節點貼上一張「永久唯讀的金色書籤」，代表此處為正式發行版本：
+### 場景 1：修復重大 Bug，發布補丁修訂版 (Patch Release)
+- **實戰需求**：修復了用戶登入 Session 提前逾時問題，需發布 `v1.2.1`：
+```powershell
+git tag -a v1.2.1 -m "fix(auth): fix session timeout calculation"
+git push origin v1.2.1
+gh release create v1.2.1 --title "v1.2.1 緊急修復版" --generate-notes
+```
+
+---
+
+### 場景 2：新增功能，發布次版本 (Minor Release)
+- **實戰需求**：完成了 Google Drive 自動備份功能，發布 `v1.3.0`：
+```powershell
+git tag -a v1.3.0 -m "feat(backup): add Google Drive cloud backup integration"
+git push origin v1.3.0
+gh release create v1.3.0 --title "v1.3.0 雲端備份功能上線" --generate-notes
+```
+
+---
+
+### 場景 3：附帶桌面安裝檔的正式發布 (Release with Installer Assets)
+- **實戰需求**：將打包好的 Windows 桌面安裝檔 `MDS-Setup.exe` 一併上傳至 GitHub Release 供使用者下載：
+```powershell
+gh release create v2.0.0 ./dist/MDS-Setup.exe --title "MDS v2.0.0 正式版" --notes "全新 UI 介面與十倍效能提升！"
+```
+
+---
+
+## 3. Git 標籤管理指令速查表 (Git Tagging Reference)
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
@@ -60,9 +93,7 @@
 
 ---
 
-## 3. 使用 GitHub CLI (`gh`) 一鍵發布正式 Release
-
-GitHub Release 允許你附帶自動生成的更新日誌 (Changelog) 與執行檔資產 (Assets)：
+## 4. GitHub CLI (`gh release`) 發布指令速查表
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>

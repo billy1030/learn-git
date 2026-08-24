@@ -1,4 +1,4 @@
-# Level 14: 超大型二進位檔案與 AI 模型管理 (Git LFS & Large Assets)
+# Level 15: 超大型二進位檔案與 AI 模型管理 (Git LFS & Large Assets)
 
 本章介紹在遊戲專案、機器學習 (ML/AI) 模型權重、4K 影音素材與大型資料集開發中，如何使用 **Git LFS (Large File Storage)** 避免儲存庫膨脹至數十 GB 導致下載卡死。
 
@@ -14,7 +14,46 @@
 
 ---
 
-## 2. Git LFS 常用核心操作指令表 (Git LFS Command Reference)
+## 2. 三大 AI 與多媒體開發實戰情境 (3 Real-World LFS Scenarios)
+
+### 情境 1：AI 專案追蹤 ONNX / PyTorch 模型權重
+- **實戰需求**：AI 辨識模型權重檔 `yolov8.onnx`（200MB），需要受版本控制但不能撐大 Git 歷史：
+```powershell
+# 1. 啟用 LFS 並宣告追蹤副檔名
+git lfs install
+git lfs track "*.onnx"
+
+# 2. 提交 LFS 規則檔
+git add .gitattributes models/yolov8.onnx
+git commit -m "chore: track AI vision weights using Git LFS"
+git push origin master
+```
+
+---
+
+### 情境 2：團隊極速 Clone，稍後再下載模型實體
+- **實戰效益**：前端或 CI 伺服器只需要跑前端介面，不需要下載 10GB 的大模型實體：
+```powershell
+# 1. Clone 專案時只拉取 1KB 指標檔案（1 秒完成）
+git clone https://github.com/org/ai-app.git
+
+# 2. 當 AI 演算法工程師確實需要本機跑模型時，才手動下載大檔：
+git lfs pull
+```
+
+---
+
+### 情境 3：檢查專案中有哪些大檔案已被 LFS 接管
+```powershell
+git lfs ls-files
+# 輸出範例：
+# a1b2c3d4e5 * models/yolov8.onnx (214 MB)
+# f6g7h8i9j0 * assets/demo-video.mp4 (85 MB)
+```
+
+---
+
+## 3. Git LFS 常用核心操作指令表 (Git LFS Command Reference)
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
@@ -55,7 +94,7 @@
 
 ---
 
-## 3. Git LFS 底層提貨券指針檔案原理 (Pointer File Anatomy)
+## 4. Git LFS 底層提貨券指針檔案原理 (Pointer File Anatomy)
 
 當你使用 LFS 追蹤一個 5GB 的模型檔案 `model.onnx` 時，Git 儲存庫內實際保存的內容僅有 130 位元組：
 

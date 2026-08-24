@@ -99,7 +99,37 @@
 
 ---
 
-## 4. 如何生成 Token 並在本地安全使用？
+## 4. 三大真實工作實戰情境範例 (3 Real-World Use Cases)
+
+### 情境 1：外包工程師進場開發（嚴格最小權限）
+- **實戰需求**：只允許外包工程師小王讀寫 `learn-git` 專案庫，嚴禁接觸公司其他機密專案，且合約期滿 30 天後自動失效。
+- **配置範例**：
+  1. 建立 **Fine-grained Token**。
+  2. Repository Access 選擇 **Only select repositories ➔ `learn-git`**。
+  3. Permissions 僅勾選 **Contents: Read and write** 與 **Pull Requests: Read and write**。
+  4. Expiration 設定 **30 days**。
+
+---
+
+### 情境 2：雲端自動化建置伺服器 (CI/CD 專用 Token)
+- **實戰需求**：Jenkins 或外部部署伺服器需要拉取代碼並更新狀態，但絕不能擁有刪除專案庫 (Admin) 的危險權限。
+- **配置範例**：
+  1. 建立專用 Token：`CI-Server-Deployer`。
+  2. 權限僅勾選 **`repo:status`**、**`repo_deployment`** 與 **`read:packages`**。
+
+---
+
+### 情境 3：Token 意外外洩緊急救災 (Accidental Leak & Revoke)
+- **實戰情境**：工程師不小心將含有 `ghp_...` 的代碼推上 GitHub。
+- **解法**：立即至 GitHub 後台 **Developer Settings ➔ Personal access tokens** 點擊 **Revoke / Delete**，並於本機重新執行：
+```powershell
+# 重新登入以綁定新 Token
+gh auth login
+```
+
+---
+
+## 5. 如何生成 Token 並在本地安全使用？
 
 ### 步驟 1：在 GitHub 生成 Token
 1. 登入 GitHub，點擊右上角頭像 ➔ **Settings（個人設定）**。

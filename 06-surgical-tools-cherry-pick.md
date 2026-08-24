@@ -1,14 +1,15 @@
-# Level 05: 精準手術刀工具：Cherry-Pick、區塊暫存與互動式變基 (Surgical Tools)
+# Level 06: 精準手術刀工具：Cherry-Pick、區塊暫存與互動式變基 (Surgical Tools)
 
 本章介紹如何在不污染分支的前提下移植特定提交 (Cherry-Pick)、挑選單一檔案內部特定行數暫存 (Patch Staging)，以及整理重構提交歷史 (Interactive Rebase)。
 
 ---
 
-## 1. 挑選提交 (`git cherry-pick` — 跨分支精準移植 Bug 修復)
+## 1. 核心思維模型：果園採櫻桃與外科手術比喻 (The Orchard & Surgery Analogy)
 
-### 核心概念 (The Concept)
-當你在 `2.0` 分支修復了一個 Bug，但 `1.0`（`master`）也同樣存在該 Bug 時；若使用 `merge` 會把 `2.0` 未完成的新功能一起帶進 `1.0` 造成災難。
-而 **`git cherry-pick`** 允許您只「摘取」該筆修復 Commit 的代碼變更，精準移植至 `1.0`。
+> **生活化比喻**：
+> - **一般 Merge（整棵樹連根拔起 🌳）**：就像你只想吃一顆甜櫻桃，卻把整座果園連同泥土、爛葉子與雜草全部倒進家裡客廳（把 2.0 未完成的半成品新功能一起倒進 1.0 正式版）。
+> - **Git Cherry-Pick（精準摘取最甜的一顆櫻桃 🍒）**：你拿著剪刀，**只剪下「修復 Bug 的那一個 Commit」**，精準帶回 1.0 正式版貼上，其餘 2.0 的新功能 100% 留在原地！
+> - **Git Add -p（外科手術刀局部縫合 🩺）**：同一個檔案寫了 100 行，但有 20 行是測試代碼、80 行是正式功能。你像外科醫生一樣**只把這 80 行縫進暫存區存檔**，不留下多餘痕跡。
 
 ```
 [v2.0 分支]  --- (Bug 修復 Commit: a1b2c3d) ---> (繼續開發 2.0 新功能...)
@@ -27,7 +28,7 @@
   <thead>
     <tr>
       <th style="width: 12%; text-align: center;">步驟</th>
-      <th style="width: 48%;">執行指令 (Command - 單行完整)</th>
+      <th style="width: 48%;">執行指令 (Command)</th>
       <th style="width: 40%;">中文防護動作說明</th>
     </tr>
   </thead>
@@ -57,7 +58,42 @@
 
 ---
 
-## 3. 互動式代碼區塊暫存 (`git add -p` — Patch Staging)
+## 3. 三大高頻實戰場景範例 (3 Real-World Use Cases)
+
+### 場景 1：線上緊急熱修復移植 (Hotfix Backporting)
+- **實戰範例**：在 `v2.0-beta` 上修復了一個記憶體溢位問題（Commit `f7e8d9c`），需要立刻同步到生產線上的 `v1.0-prod`：
+```powershell
+git checkout v1.0-prod
+git cherry-pick f7e8d9c
+git push origin v1.0-prod
+```
+
+---
+
+### 場景 2：不小心在錯誤的分支上寫了 Code (Commit on Wrong Branch)
+- **實戰範例**：你本該在 `feat/auth` 分支寫作，卻手滑在 `master` 提交了 Commit `b2c3d4e`：
+```powershell
+# 1. 切換到正確的分支並摘取該 Commit
+git checkout feat/auth
+git cherry-pick b2c3d4e
+
+# 2. 切回 master 並將指標倒退一步
+git checkout master
+git reset --hard HEAD~1
+```
+
+---
+
+### 場景 3：發 PR 前將 10 個雜亂 Commit 壓成 1 個乾淨提交
+- **實戰範例**：本機寫功能時提交了 `fix typo`、`wip`、`test` 5 次，發 PR 前整理為 1 個：
+```powershell
+git rebase -i HEAD~5
+# 將第 2~5 行的 'pick' 改為 'squash' 或 'fixup'，存檔後自動合併！
+```
+
+---
+
+## 4. 互動式代碼區塊暫存 (`git add -p` — Patch Staging)
 
 當同一個檔案內有 10 處修改，但您只想把其中 3 處納入當次 Commit 時：
 
@@ -73,22 +109,7 @@ Git 會逐一展示每個修改區塊 (Hunk) 並詢問：
 
 ---
 
-## 4. 互動式變基整理歷史 (`git rebase -i` — Interactive Rebase)
-
-在發出 Pull Request 前，將本機零碎的暫存 Commit 整理成乾淨優雅的提交：
-
-```powershell
-# 整理最近 4 筆提交
-git rebase -i HEAD~4
-```
-
-編輯器會列出清單：
-```text
-pick e1a2b3c feat: 新增驗證路由
-squash d4e5f6g 修復驗證拼字錯誤
-squash a7b8c9d 補充測試
-pick 3d2e1f0 docs: 更新 API 文件
-```
+## 5. 互動式變基指令速查表 (`git rebase -i`)
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
