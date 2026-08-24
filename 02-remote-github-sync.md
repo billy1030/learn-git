@@ -62,14 +62,14 @@
 
 ## 2. 團隊各角色職責與專屬單行指令地圖 (Role-Based Command Matrix)
 
-為所有指令提供最大橫向寬度（`56%`）並強制單行不折行（`white-space: nowrap`）：
+在專業團隊中，不同角色在專案生命週期中會使用不同的指令集：
 
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
     <tr>
       <th style="width: 12%;">角色 (Role)</th>
       <th style="width: 16%;">職責比喻</th>
-      <th style="width: 56%;">主要常用指令 (Primary CLI - 單行完整不換行)</th>
+      <th style="width: 56%;">主要常用指令 (Primary CLI)</th>
       <th style="width: 16%;">日常典型動作</th>
     </tr>
   </thead>
@@ -134,7 +134,7 @@ gh pr merge --squash --delete-branch # 誰執行？👉 審查者/主編 (團隊
   <thead>
     <tr>
       <th style="width: 8%; text-align: center;">步驟</th>
-      <th style="width: 46%;">執行指令 (Command - 單行完整呈現)</th>
+      <th style="width: 46%;">執行指令 (Command)</th>
       <th style="width: 23%;">團隊環境執行者 (Team)</th>
       <th style="width: 23%;">個人專案執行者 (Solo)</th>
     </tr>

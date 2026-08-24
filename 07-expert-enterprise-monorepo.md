@@ -10,7 +10,7 @@
   <thead>
     <tr>
       <th style="width: 16%;">技術領域</th>
-      <th style="width: 52%;">標準指令 (Command - 單行完整不換行)</th>
+      <th style="width: 52%;">標準指令 (Command)</th>
       <th style="width: 32%;">中文作用說明與效益</th>
     </tr>
   </thead>

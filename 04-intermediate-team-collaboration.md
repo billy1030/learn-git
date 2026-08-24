@@ -25,7 +25,7 @@
       <th style="width: 10%; text-align: center;">情境</th>
       <th style="width: 20%;">日常情境比喻 (Analogy)</th>
       <th style="width: 22%;">團隊協作策略 (Strategy)</th>
-      <th style="width: 48%;">標準 CLI 指令 (CLI Command - 單行完整不換行)</th>
+      <th style="width: 48%;">標準 CLI 指令 (CLI Command)</th>
     </tr>
   </thead>
   <tbody>
@@ -274,13 +274,11 @@ git branch -d feat/google-drive-backup
 
 ## 5. 團隊協作常見 CLI 指令速查表 (Quick Reference)
 
-為所有常用指令保留充足寬度（`48%`），並保證單行完整不折行：
-
 <table style="width: 100%; border-collapse: collapse;">
   <thead>
     <tr>
       <th style="width: 24%;">需求動作</th>
-      <th style="width: 48%;">指令 (Command - 單行完整)</th>
+      <th style="width: 48%;">指令 (Command)</th>
       <th style="width: 28%;">生活化寫書比喻</th>
     </tr>
   </thead>
