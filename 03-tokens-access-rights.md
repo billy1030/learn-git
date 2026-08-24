@@ -1,4 +1,4 @@
-# Level 16: 安全存取憑證、Token 與細粒度權限控制 (Tokens, PAT & Scopes)
+# Level 03: 安全存取憑證、Token 與細粒度權限 (Tokens, PAT & Scopes)
 
 本章介紹 GitHub 的現代安全身分驗證機制：個人存取權杖 (Personal Access Token, PAT)、權限範圍 (Scopes)、經典權杖與細粒度權杖的差異，以及如何透過 GitHub CLI (`gh auth`) 安全管理金鑰。
 
