@@ -1,6 +1,6 @@
 # 00 - Git Master Index & 學習路徑總覽 (Learning Roadmap)
 
-歡迎來到完整的漸進式 Git 實戰指南。本課程將帶您從零基礎逐步進階至企業級版本控制架構。
+歡迎來到完整的漸進式 Git 實戰指南。本課程將帶您從零基礎逐步進階至企業級版本控制、分支保護與 CI/CD 自動化架構。
 
 ---
 
@@ -63,6 +63,18 @@
       <td><a href="./08-team-permissions-roles.md"><code>08-team-permissions-roles.md</code></a></td>
       <td>團隊成員管理與權限控制<br>(Team Permissions &amp; Roles)</td>
       <td>五大權限層級 (Read, Triage, Write, Maintain, Admin), Web UI 邀請, <code>gh api</code> 命令列批次授權, 權限查詢與撤銷</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 09</strong></td>
+      <td><a href="./09-branch-protection-rules.md"><code>09-branch-protection-rules.md</code></a></td>
+      <td>主幹分支保護與合規審批<br>(Branch Protection Rules)</td>
+      <td>強制 PR 審批 (Require Reviews), 強制 CI 測試通過 (Status Checks), 阻擋 <code>push -f</code> 強制覆蓋, <code>gh api</code> 命令列上鎖</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 10</strong></td>
+      <td><a href="./10-cicd-github-actions.md"><code>10-cicd-github-actions.md</code></a></td>
+      <td>CI/CD 自動化與 GitHub Actions<br>(Pipelines &amp; Automation)</td>
+      <td>無人自動化品檢工廠比喻, <code>.github/workflows/ci.yml</code> 實戰, 自動測試與打包, <code>gh run list / watch</code> 命令列即時監控</td>
     </tr>
   </tbody>
 </table>
