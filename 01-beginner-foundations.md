@@ -1,6 +1,6 @@
 # Level 01: 基礎核心與個人工作流 (Beginner Foundations)
 
-本章介紹 Git 的核心思維模型（Mental Model）、提交前置準備 (Pre-flight Setup)、Commit ID 數位指紋原理、業界標準語意化規範 (Conventional Commits)、個人本機操作全景，以及 `.gitignore` 深度防護規則與快取陷阱解藥。
+本章介紹 Git 的核心思維模型（Mental Model）、提交前置準備 (Pre-flight Setup)、Commit ID 數位指紋原理、業界標準語意化規範 (Conventional Commits)、個人本機操作全景、`.gitignore` 深度防護規則，以及資深工程師必備的 Git Aliases 終極加速別名捷徑。
 
 ---
 
@@ -112,8 +112,9 @@ Git 並非單純拷貝檔案，而是在本機的三個工作區域之間流轉�
 
 ---
 
-## 5. 初次設定個人身分與提交範本 (Identity Setup)
+## 5. 初次身分設定與 Git 終極加速別名 (Aliases & Identity)
 
+### A. 基礎身分與全域設定
 ```powershell
 # 設定提交者姓名與電子郵件（會記錄在每一筆 commit 中）
 git config --global user.name "Your Name"
@@ -124,10 +125,61 @@ git config --global init.defaultBranch master
 
 # Windows 與 Linux 換行符號自動轉換 (CRLF vs LF)
 git config --global core.autocrlf true
-
-# (選用) 設定全域 Commit 訊息範本
-git config --global commit.template ~/.gitmessage
 ```
+
+---
+
+### B. Git 終極加速別名速查表 (Productivity Aliases)
+
+將冗長的指令設定為超速單一縮寫，大幅提升日常工作效率：
+
+```powershell
+# 一鍵配置常用全域別名：
+git config --global alias.st "status -sb"
+git config --global alias.co checkout
+git config --global alias.cob "checkout -b"
+git config --global alias.ci "commit -m"
+git config --global alias.br branch
+git config --global alias.lg "log --graph --oneline --decorate -10"
+git config --global alias.unstage "restore --staged"
+```
+
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="width: 18%;">快捷別名 (Alias)</th>
+      <th style="width: 48%;">背後完整指令</th>
+      <th style="width: 34%;">中文效益說明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>git st</code></strong></td>
+      <td style="white-space: nowrap;"><code>git status -sb</code></td>
+      <td>極速精簡版狀態檢視，乾淨俐落。</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>git lg</code></strong></td>
+      <td style="white-space: nowrap;"><code>git log --graph --oneline --decorate -10</code></td>
+      <td>彩色圖形化單行提交線路圖。</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>git cob &lt;name&gt;</code></strong></td>
+      <td style="white-space: nowrap;"><code>git checkout -b &lt;name&gt;</code></td>
+      <td>一秒開闢並切換至新功能分支。</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>git unstage &lt;file&gt;</code></strong></td>
+      <td style="white-space: nowrap;"><code>git restore --staged &lt;file&gt;</code></td>
+      <td>將誤加暫存區的檔案移出（不影響檔案修改）。</td>
+    </tr>
+    <tr>
+      <td style="white-space: nowrap;"><strong><code>git ci "..."</code></strong></td>
+      <td style="white-space: nowrap;"><code>git commit -m "..."</code></td>
+      <td>快速蓋章提交快照。</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
