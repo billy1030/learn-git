@@ -1,6 +1,6 @@
 # 00 - Git Master Index & 學習路徑總覽 (Learning Roadmap)
 
-歡迎來到完整的漸進式 Git 實戰指南。本課程共計 **14 大核心級別**，帶您從零基礎個人開發，逐步進階至團隊協作、企業架構、分支防護、CI/CD 自動化、版本發布、AI 時代人機協同與大型二進位模型管理。
+歡迎來到完整的漸進式 Git 實戰指南。本課程共計 **15 大核心級別**，帶您從零基礎個人開發，逐步進階至團隊協作、企業架構、分支防護、CI/CD 自動化、版本發布、AI 協同、大型模型版控與 Gist 代碼便利貼。
 
 ---
 
@@ -74,7 +74,7 @@
       <td style="text-align: center;"><strong>Level 10</strong></td>
       <td><a href="./10-cicd-github-actions.md"><code>10-cicd-github-actions.md</code></a></td>
       <td>CI/CD 自動化與 GitHub Actions<br>(Pipelines &amp; Automation)</td>
-      <td>無人自動化品檢工廠比喻, <code>.github/workflows/ci.yml</code> 實戰, 自動測試與打包, <code>gh run list / watch</code> 命令列即時監控</td>
+      <td>無人自動化工廠比喻, <code>.github/workflows/ci.yml</code> 實戰, 自動測試與打包, <code>gh run list / watch</code> 命令列即時監控</td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>Level 11</strong></td>
@@ -99,6 +99,12 @@
       <td><a href="./14-git-lfs-large-assets.md"><code>14-git-lfs-large-assets.md</code></a></td>
       <td>超大二進位檔與 AI 模型管理<br>(Git LFS &amp; Large Assets)</td>
       <td>雲端置物櫃與 1KB 提貨券指標比喻, <code>git lfs install / track</code>, <code>.gitattributes</code>, ONNX/模型/影音大檔極速拉取</td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>Level 15</strong></td>
+      <td><a href="./15-github-gist-snippets.md"><code>15-github-gist-snippets.md</code></a></td>
+      <td>輕量程式碼片段與雲端便利貼<br>(GitHub Gist &amp; Snippets)</td>
+      <td>雲端代碼便利貼比喻, Public vs Secret 隱私模式, <code>gh gist create</code>, 管道傳輸, 嵌入部落格, 零成本即時分享</td>
     </tr>
   </tbody>
 </table>
